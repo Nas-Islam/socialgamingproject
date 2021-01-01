@@ -23,14 +23,13 @@ def addrating():
         game_review = form.game_review.data
         game_rating = form.game_rating.data
         game_details = Game.query.filter_by(name=game_name).first()
-        #review_details = Rating.query.filter_by(name=game_name).filter_by(username=user_name).first()
         if len(game_name) == 0 or len(game_review) == 0:
             error = "Please give a name to the game you want to review"
         else:
             new_review = Rating(username = user_name, name = game_name, review = game_review, rating = game_rating, game_id = game_details.id)
             db.session.add(new_review)
             db.session.commit()
-            return redirect(url_for("rating"))
+            return redirect(url_for("showrating", id=game_details.id))
 
     return render_template('ratingform.html', form = form, message = error)
 
@@ -38,7 +37,8 @@ def addrating():
 def searchrating():
     error = ""
     form = GameForm()
-    return render_template('searchrating.html', form = form, message = error, chosen_rating = Rating.query.filter_by(name=form.game_name.data).all())
+    game_name = form.game_name.data
+    return render_template('searchrating.html', form = form, message = error, chosen_rating = Rating.query.filter_by(name=game_name).all())
 
 @app.route('/showrating/<int:id>')
 def showrating(id):
@@ -79,7 +79,7 @@ def updatereview(id):
         review_to_change.review = game_review
         review_to_change.rating = game_rating
         db.session.commit()
-        return redirect(url_for('gamepage'))
+        return redirect(url_for('showrating', id=review_to_change.game_id))
     return render_template('updatereview.html', form=form)
 
 @app.route('/delete/<int:id>')
