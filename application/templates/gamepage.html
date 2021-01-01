@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+<form action="{{ url_for('addgame')}}">
+  <input type=submit value="Add">
+</form>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Platforms</th>
+    <th>Genre</th>
+    <th>Rating</th>
+  </tr>
+{% for game in all_games %}
+  <tr>
+  <th>{{game.name}}</th>
+  <th>{{game.platform}}</th>
+  <th>{{game.genre}}</th>
+  <th>
+  {% for rating in game.rating %}
+  {{rating.rating}}
+  {% endfor %}
+  <br>
+  <form action="{{ url_for('showrating', id=game.id)}}"><input type=submit value="Check Reviews"></form>
+  </th>
+
+  </tr>
+{% endfor %}
+{% endblock body %}

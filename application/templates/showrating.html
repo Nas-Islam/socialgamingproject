@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<table style="width:100%">
+    <tr>
+        <th>Name</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Username</th>
+      </tr>
+{% for rating in chosen_rating %}
+      <tr>
+      <th>{{rating.name}}</th>
+      <th>{{rating.rating}}</th>
+      <th>{{rating.review}}<form action="{{ url_for('updatereview', id=rating.id)}}">
+            <input type=submit value="Update Review">
+          </form></th>
+      <th>{{rating.username}}<form action="{{ url_for('delete', id=rating.id)}}">
+            <input type=submit value="Delete Review">
+          </form></th>
+      </tr>
+{% endfor %}
+
+{% endblock body %}

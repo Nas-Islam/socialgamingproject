@@ -1,0 +1,18 @@
+<html>
+<body>
+<h1>Gamer's Haven</h1>
+<form action="{{ url_for('home')}}">
+  <input type=submit value="Home">
+</form>
+
+<form action="{{ url_for('rating')}}">
+  <input type=submit value="Rating & Reviews">
+</form>
+
+<form action="{{ url_for('gamepage')}}">
+  <input type=submit value="Games">
+</form>
+{% block body %}
+{% endblock body %}
+</body>
+</html>

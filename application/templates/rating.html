@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+<form action="{{ url_for('addrating')}}">
+    <input type=submit value="Add A Review">
+</form>
+<form action="{{ url_for('searchrating')}}">
+    <input type=submit value="Search">
+</form>
+{% endblock body %}
