@@ -89,3 +89,9 @@ def delete(id):
     db.session.commit()
     return redirect(url_for("gamepage"))
 
+@app.route('/deletegame/<int:id>')
+def deletegame(id):
+    game_to_delete = Game.query.filter_by(id=id).first()
+    db.session.delete(game_to_delete)
+    db.session.commit()
+    return redirect(url_for("gamepage"))
