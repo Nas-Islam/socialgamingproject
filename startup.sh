@@ -9,3 +9,7 @@ pip3 install flask-wtf
 
 python3 create.py
 python3 app.py
+
+sudo systemctl daemon-reload
+sudo systemctl stop app.service
+sudo systemctl start app.service
