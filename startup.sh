@@ -7,9 +7,10 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 pip3 install flask-wtf
 
+sudo cp app.service /etc/systemd/system/app.service
 sudo systemctl daemon-reload
 sudo systemctl stop app.service
 sudo systemctl start app.service
 
-python3 create.py
-python3 app.py
+#python3 create.py
+#python3 app.py
