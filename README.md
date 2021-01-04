@@ -64,7 +64,7 @@ Additionally, I would like the user to:
 
 ### Database Structure
 
-Below displays an entity-relationship diagram (ERD) showing the initial structure of the database if all items were implemented into the code.
+Below displays an entity-relationship diagram (ERD) showing the structure of the database into the code.
 
 >![ERD1][erd1]
 > *Figure 1: Initial Entity-Relationship Diagram (ERD)*

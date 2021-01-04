@@ -1,5 +1,6 @@
 from application import app, db
-from application.models import Game, GameForm, Rating, AddForm
+from application.models import Game, Rating, Game_rating
+from application.forms import GameForm, AddForm
 from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy.sql import func
 
@@ -23,13 +24,14 @@ def addrating():
         game_review = form.game_review.data
         game_rating = form.game_rating.data
         game_details = Game.query.filter_by(name=game_name).first()
-        if len(game_name) == 0 or len(game_review) == 0:
-            error = "Please give a name to the game you want to review"
-        else:
-            new_review = Rating(username = user_name, name = game_name, review = game_review, rating = game_rating, game_id = game_details.id)
-            db.session.add(new_review)
-            db.session.commit()
-            return redirect(url_for("showrating", id=game_details.id))
+
+        new_review = Rating(username = user_name, name = game_name, review = game_review, rating = game_rating)
+        db.session.add(new_review)
+        db.session.commit()
+        add_together = Game_rating(game_id=game_details.id, rating_id = new_review.id)
+        db.session.add(add_together)
+        db.session.commit()
+        return redirect(url_for("showrating", id=game_details.id))
 
     return render_template('ratingform.html', form = form, message = error)
 
@@ -47,7 +49,7 @@ def showrating(id):
 
 @app.route('/gamepage')
 def gamepage():
-    return render_template('gamepage.html', all_games = Game.query.all())
+    return render_template('gamepage.html', chosen_game = Game_rating.query.all(), all_games = Game.query.all(), all_rating = Rating.query.all())
 
 @app.route('/addgame', methods=['GET', 'POST'])
 def addgame():
@@ -59,13 +61,10 @@ def addgame():
         platform_name = form.platform_name.data
         genre_name = form.genre_name.data
 
-        if len(game_name) == 0 or genre_name == 0:
-            error = "Please fill all parts to add a game."
-        else:
-            new_game = Game(name = game_name, platform = platform_name, genre = genre_name)
-            db.session.add(new_game)
-            db.session.commit()
-            return redirect(url_for("gamepage"))
+        new_game = Game(name = game_name, platform = platform_name, genre = genre_name)
+        db.session.add(new_game)
+        db.session.commit()
+        return redirect(url_for("gamepage"))
     return render_template('addgame.html', form = form, message = error)
 
 @app.route('/updatereview/<int:id>', methods=['GET', 'POST'])
@@ -79,7 +78,8 @@ def updatereview(id):
         review_to_change.review = game_review
         review_to_change.rating = game_rating
         db.session.commit()
-        return redirect(url_for('showrating', id=review_to_change.game_id))
+        game_details = Game.query.filter_by(name=review_to_change.name).first()
+        return redirect(url_for('showrating', id=game_details.id))
     return render_template('updatereview.html', form=form)
 
 @app.route('/delete/<int:id>')
