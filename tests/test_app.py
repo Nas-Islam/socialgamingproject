@@ -4,7 +4,8 @@ from flask_testing import TestCase
 
 # import the app's classes and objects
 from application import app, db
-from application.models import Rating, Game, GameForm, AddForm
+from application.models import Rating, Game, Game_rating
+from application.forms import GameForm, AddForm
 
 class TestBase(TestCase):
     def create_app(self):
@@ -21,7 +22,7 @@ class TestBase(TestCase):
         samplegame1 = Game(name="Test Game", platform = 1, genre = "Test Genre")
         db.session.add(samplegame1)
         db.session.commit()
-        samplerating1 = Rating(name=samplegame1.name, rating=1, review="Test Review", username="Test_User", game_id=samplegame1.id)
+        samplerating1 = Rating(name=samplegame1.name, rating=1, review="Test Review", username="Test_User")
         db.session.add(samplerating1)
         db.session.commit()
     
@@ -87,6 +88,7 @@ class TestAdd(TestBase):
         self.assertIn(b"Good test", response.data)
         self.assertIn(b"Nice_guy", response.data)
 
+class TestAdd(TestBase):
     def test_add_game(self):
         response = self.client.post(
             url_for('addgame'),
@@ -96,22 +98,6 @@ class TestAdd(TestBase):
         self.assertIn(b"Game test", response.data)
         self.assertIn(b"1", response.data)
         self.assertIn(b"Test Genre", response.data)
-
-    def test_add_nogame(self):
-        response = self.client.post(
-            url_for('addgame'),
-            data = dict(game_name = "", genre_name = ""),
-            follow_redirects=True
-        )
-        self.assertIn(b"Please fill all parts to add a game.", response.data)
-
-    def test_add_noreview(self):
-        response = self.client.post(
-            url_for('addrating'),
-            data = dict(game_name = "", game_review = ""),
-            follow_redirects=True
-        )
-        self.assertIn(b"Please give a name to the game you want to review", response.data)
 
     def test_add_search(self):
         response = self.client.post(
@@ -133,9 +119,17 @@ class TestUpdate(TestBase):
 
 ## Tests the selected data is deleted from the table and is no longer viewable on the homepage
 class TestDelete(TestBase):
+    def test_delete_game(self):
+        response = self.client.post(
+            url_for('deletegame', id=1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b"Test Game", response.data)
+
     def test_delete_review(self):
         response = self.client.post(
             url_for('delete', id=1),
             follow_redirects=True
         )
-        self.assertNotIn(b"Test Game", response.data)
+        self.assertNotIn(b"Test Review", response.data)
+
