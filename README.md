@@ -64,11 +64,13 @@ Additionally, I would like the user to:
 
 ### Database Structure
 
-Below is an entity-relationship diagram (ERD) showing the structure of the database. 
+Below displays an entity-relationship diagram (ERD) showing the initial structure of the database if all items were implemented into the code.
 
+>![ERD1][erd1]
+> *Figure 1: Initial Entity-Relationship Diagram (ERD)*
 
-![ERD][erd1]
-> Entity-Relationship Diagram
+>![ERD2][erd2]
+> *Figure 2: Final Entity-Relationship Diagram (ERD)*
 
 
 ![cipipeline][ci-pip]
@@ -76,5 +78,6 @@ Below is an entity-relationship diagram (ERD) showing the structure of the datab
 ## Authors
 Naserul Islam
 
-[erd1]: https://imgur.com/WykpT4C.png
+[erd1]: https://imgur.com/XzTXPzK.png
+[erd2]: https://imgur.com/WykpT4C.png
 [ci-pip]: https://imgur.com/R4Wv1ul.png
