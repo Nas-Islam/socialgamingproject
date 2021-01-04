@@ -8,13 +8,10 @@ pip3 install -r requirements.txt
 #pip3 install flask-wtf
 pytest
 
-
-python3 create.py
-python3 app.py
-
-
 sudo systemctl daemon-reload
 sudo systemctl stop app.service
 sudo systemctl start app.service
 
+python3 create.py
+python3 app.py
 
