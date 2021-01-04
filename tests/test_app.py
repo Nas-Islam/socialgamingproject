@@ -20,8 +20,10 @@ class TestBase(TestCase):
         db.create_all()
 
         samplegame1 = Game(name="Test Game", platform = 1, genre = "Test Genre")
+        samplegame2 = Game(name="Test Game2", platform = 2, genre = "Test Genre2")
         db.session.add(samplegame1)
-        db.session.commit()
+        db.session.add(samplegame1)
+       # db.session.commit()
         samplerating1 = Rating(name=samplegame1.name, rating=1, review="Test Review", username="Test_User")
         db.session.add(samplerating1)
         db.session.commit()
@@ -35,36 +37,40 @@ class TestViews(TestBase):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
     
-    def test_add_get(self):
+    def test_rating_get(self):
         response = self.client.get(url_for('rating'))
         self.assertEqual(response.status_code, 200)
 
-    def test_completed_get(self):
+    def test_addrating_get(self):
         response = self.client.get(url_for('addrating'))
         self.assertEqual(response.status_code, 200)
     
-    def test_updatedesc_get(self):
+    def test_searchrating_get(self):
         response = self.client.get(url_for('searchrating'))
         self.assertEqual(response.status_code, 200)
 
-    def test_isitcomplete_get(self):
+    def test_showrating_get(self):
         response = self.client.get(url_for('showrating', id=1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
     
-    def test_updatedesc_get(self):
+    def test_gamepage_get(self):
         response = self.client.get(url_for('gamepage'))
         self.assertEqual(response.status_code, 200)
 
-    def test_updatedesc_get(self):
+    def test_addgame_get(self):
         response = self.client.get(url_for('addgame'))
         self.assertEqual(response.status_code, 200)
 
-    def test_updatedesc_get(self):
+    def test_updatereview_get(self):
         response = self.client.get(url_for('updatereview', id=1))
         self.assertEqual(response.status_code, 200)
 
     def test_delete_get(self):
         response = self.client.get(url_for('delete', id=1), follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_deletegame_get(self):
+        response = self.client.get(url_for('deletegame', id=1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
 ## Tests all the features of the task table are viewed on the homepage  
@@ -88,7 +94,6 @@ class TestAdd(TestBase):
         self.assertIn(b"Good test", response.data)
         self.assertIn(b"Nice_guy", response.data)
 
-class TestAdd(TestBase):
     def test_add_game(self):
         response = self.client.post(
             url_for('addgame'),
@@ -121,10 +126,10 @@ class TestUpdate(TestBase):
 class TestDelete(TestBase):
     def test_delete_game(self):
         response = self.client.post(
-            url_for('deletegame', id=1),
+            url_for('deletegame', id=2),
             follow_redirects=True
         )
-        self.assertNotIn(b"Test Game", response.data)
+        self.assertNotIn(b"Test Game2", response.data)
 
     def test_delete_review(self):
         response = self.client.post(
