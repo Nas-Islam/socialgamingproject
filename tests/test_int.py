@@ -15,8 +15,8 @@ class TestBase(LiveServerTestCase):
         """
         Configure the Flask app before every test.
         """
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
-        app.config['SECRET_KEY'] = "aodjiwjdoiwja"
+        app.config['SQLALCHEMY_DATABASE_URI'] = getenv("DATABASE_URI")
+        app.config['SECRET_KEY'] = getenv("SECRET_KEY")
         return app
 
     def setUp(self):
