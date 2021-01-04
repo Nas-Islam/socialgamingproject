@@ -12,5 +12,5 @@ sudo systemctl daemon-reload
 sudo systemctl stop app.service
 sudo systemctl start app.service
 
-#python3 create.py
-#python3 app.py
+python3 create.py
+python3 app.py
