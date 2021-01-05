@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from application import app, db
 from application.models import Game, Rating
+from os import getenv
 
 class TestBase(LiveServerTestCase):
 
