@@ -9,7 +9,7 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # pytest goes here
-pytest --cov=application
+pytest tests/test_app.py --cov=application
 
 # Make the installation directory
 sudo cp -r application /opt/sgproject/application
