@@ -137,7 +137,7 @@ sudo apt-get install -y chromium browser
 wget https://chromedriver.storage.googelapis.com/2.41/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
 
-The test successfully passes as displayed in Figure 8.
+The test successfully passes as displayed in Figure 8. 
 
 >![inttest][integ]
 >
