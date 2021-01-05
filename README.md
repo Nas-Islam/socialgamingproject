@@ -169,7 +169,9 @@ The ‘update review’ URL allows the user to update a review of a specific rev
 >
 > *Figure 16: Update Rating Page*
 ## Known Issues
-There are no know issues in the current build of the application.
+There are a few known bugs in the system:
+* Entering a form field with a phrase that isn't in the database will cause an Attribute Error.
+
 
 ## Future Improvements
 There are a number of improvements I would like to add to this application that would be beneficial:
