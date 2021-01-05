@@ -114,6 +114,13 @@ Displayed below (Figure 6) is the updated risk assessment which was made after t
 > *Figure 6: Updated Risk Assessment*
 
 ## Testing
+To do my tests I used the following test files:
+>test_app.py (Unit Test)
+>test_int.py (Integration Test)
+
+I used the following instructions to run my tests:
+>pytest --cov=application --cov-report-term-missing
+
 ### Unit Test
 Unit testing is a functional type of testing, this means that if a feature of the website is used it will test the action is performed correctly. This is done by testing individual units of source code using various tests to determine if they are fit for use. 
 
@@ -122,7 +129,16 @@ The ‘pytest’ coverage mechanism shows us that all of the source code is bein
 >
 > *Figure 7: Pytest - Unit Test Coverage*
 ### Integration Test
-Integration testing is also a functional type of testing. It is the testing of multiple components of the application to cheque that they work together. Integration testing requires the developer to act like a consumer or user of the application and also shows if the end goal is reached by the function of a submit button in this instance. As shown in Figure 8, the integration testing is displayed as ‘test_int.py’. 
+Integration testing is also a functional type of testing. It is the testing of multiple components of the application to cheque that they work together. Integration testing requires the developer to act like a consumer or user of the application and also shows if the end goal is reached by the function of a submit button in this instance. As shown in Figure 8, the integration testing is displayed as ‘test_int.py’.
+
+I used pytest and selenium for my integrated testing. Instructions are as followed:
+sudo apt-get install -y unzip
+sudo apt-get install -y chromium browser
+wget https://chromedriver.storage.googelapis.com/2.41/chromedriver_linux64.zip
+unzip chromedriver_linux64.zip
+
+The test successfully passes as displayed in Figure 8.
+
 >![inttest][integ]
 >
 > *Figure 8: Pytest - Integration Test*
@@ -170,7 +186,7 @@ The ‘update review’ URL allows the user to update a review of a specific rev
 >
 > *Figure 16: Update Rating Page*
 ## Known Issues
-The bugs in the system are listed below:
+There are a few known bugs in the system:
 * Entering a form field with a phrase that isn't in the database will cause an Attribute Error.
 
 
