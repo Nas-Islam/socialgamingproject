@@ -170,7 +170,7 @@ The ‘update review’ URL allows the user to update a review of a specific rev
 >
 > *Figure 16: Update Rating Page*
 ## Known Issues
-There are a few known bugs in the system:
+The bugs in the system are listed below:
 * Entering a form field with a phrase that isn't in the database will cause an Attribute Error.
 
 

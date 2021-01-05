@@ -22,7 +22,6 @@ sudo cp -r startup.sh /opt/sgproject/startup.sh
 # Give jenkins user permissions for the installation directory
 sudo chown -R jenkins /opt/sgproject
 
-
 sudo systemctl daemon-reload
 sudo systemctl stop app.service
 sudo systemctl start app.service
